@@ -1,0 +1,56 @@
+/***********************************************************************
+* Task 3.3 D
+* .
+*	Date				Author				Reason
+*	14 April 2021		Amit Parmar			Initial version
+* 
+*/
+
+
+// Set up the pin 5 for output and subscribe the device for the published event.
+void setup() {
+    pinMode(D5, OUTPUT);
+    pinMode(D6, OUTPUT);    
+    Particle.subscribe("Deakin_RIOT_SIT210_Photon_Buddy",toggleLed,MY_DEVICES);
+}
+
+//Nothing happens in the loop as we just want to wave only when the published event is detected
+// So, leave it blank.
+void loop() {
+
+}
+
+// The method will be called when the event is published. Turn the LED on and off 3 times, causing a wave.
+void toggleLed(const char *event, const char *data){
+    
+    if (strcmp(data, "wave") == 0)
+    {
+        digitalWrite(D5, HIGH);
+        delay(500);
+        digitalWrite(D5, LOW);
+        delay(500);
+        
+        digitalWrite(D5, HIGH);
+        delay(500);
+        digitalWrite(D5, LOW);
+        delay(500);
+        
+        digitalWrite(D5, HIGH);
+        delay(500);
+        digitalWrite(D5, LOW);
+        delay(500);
+    }
+    else if (strcmp(data, "pat") == 0)
+    {
+        digitalWrite(D6, HIGH);
+        delay(1000);
+        digitalWrite(D6, LOW);
+        delay(1000);
+        
+        digitalWrite(D6, HIGH);
+        delay(1000);
+        digitalWrite(D6, LOW);
+        delay(1000);
+    }
+
+}
